@@ -1,7 +1,6 @@
 # Pegasus-Project
 
-# Usage
-Choose the right branch in this repository to get the code for the different parts of the series.
+# Usage.
 
 Install all dependencies
 ```sh
