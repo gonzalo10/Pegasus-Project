@@ -17,7 +17,7 @@ app.use(
     rootValue: graphQlResolvers,
     graphiql: true
   })
-);;
+);
 
 
 
