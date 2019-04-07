@@ -26,7 +26,6 @@ class AuthPage extends Component {
     event.preventDefault();
     const email = this.emailEl.current.value;
     const password = this.passwordEl.current.value;
-    console.log('submitHandle', email, password, this.state)
 
     if (email.trim().length === 0 || password.trim().length === 0) {
       return;
@@ -71,12 +70,12 @@ class AuthPage extends Component {
         return res.json();
       })
       .then(resData => {
-        if (!this.state.isLogin) {
-            this.context.login(
-                resData.login.token,
-                resData.data.login.userId,
-                resData.data.tokenExpiration
-            );
+        if (resData.data.login.token) {
+          this.context.login(
+            resData.data.login.token,
+            resData.data.login.userId,
+            resData.data.login.tokenExpiration
+          );
         }
       })
       .catch(err => {
