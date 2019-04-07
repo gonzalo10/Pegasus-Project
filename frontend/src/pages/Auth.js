@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 
 import './Auth.css';
+import AuthContext from '../context/auth-context';
 
 class AuthPage extends Component {
   state = {
     isLogin: true
   };
+
+  static contextType = AuthContext;
 
   constructor(props) {
     super(props);
@@ -23,6 +26,7 @@ class AuthPage extends Component {
     event.preventDefault();
     const email = this.emailEl.current.value;
     const password = this.passwordEl.current.value;
+    console.log('submitHandle', email, password, this.state)
 
     if (email.trim().length === 0 || password.trim().length === 0) {
       return;
@@ -67,7 +71,13 @@ class AuthPage extends Component {
         return res.json();
       })
       .then(resData => {
-        console.log(resData);
+        if (!this.state.isLogin) {
+            this.context.login(
+                resData.login.token,
+                resData.data.login.userId,
+                resData.data.tokenExpiration
+            );
+        }
       })
       .catch(err => {
         console.log(err);
