@@ -219,6 +219,16 @@ class EventsPage extends Component {
   render() {
     return (
       <React.Fragment>
+        <div className='recommend_row'>
+          <div className='recommend_title'>
+            <h3>You are one trip away from an awesome trip</h3>
+          </div>
+          <div>
+            <button className='recommend_button'>
+              Recomend Trip
+            </button>
+          </div>
+        </div>
         {(this.state.creating || this.state.selectedEvent) && <Backdrop />}
         {this.state.creating && (
           <Modal
