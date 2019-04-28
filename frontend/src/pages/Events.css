@@ -6,3 +6,29 @@
   width: 30rem;
   max-width: 80%;
 }
+.recommend_row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  flex-direction: column;
+}
+
+.recommend_button {
+  width: 200px;
+  height: 50px;
+  background-color: #5101d1;
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.recommend_button:hover {
+  background-color: #5101d1b4
+}
+
+.recommend_title {
+  margin-bottom: 30px;
+}
