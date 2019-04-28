@@ -5,6 +5,8 @@ import Backdrop from '../components/Backdrop/Backdrop';
 import EventList from '../components/Events/EventList/EventList';
 import Spinner from '../components/Spinner/Spinner';
 import AuthContext from '../context/auth-context';
+import { Link } from 'react-router-dom';
+
 import './Events.css';
 
 class EventsPage extends Component {
@@ -224,9 +226,12 @@ class EventsPage extends Component {
             <h3>You are one trip away from an awesome trip</h3>
           </div>
           <div>
-            <button className='recommend_button'>
+            <button 
+              className='recommend_button'
+              onClick={this.handleRecommend} >
               Recomend Trip
             </button>
+            <Link to="/trips">Recommend</Link>
           </div>
         </div>
         {(this.state.creating || this.state.selectedEvent) && <Backdrop />}
