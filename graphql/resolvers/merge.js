@@ -27,6 +27,13 @@ const events = async eventIds => {
     throw err;
   }
 };
+const trips = async payload => {
+  try {
+    console.log('Merge.js trips')
+  } catch (err) {
+    throw err;
+  }
+};
 
 const singleEvent = async eventId => {
   try {

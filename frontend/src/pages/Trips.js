@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import AuthContext from '../context/auth-context';
 import './Events.css';
-const axios = require('axios');
+//const axios = require('axios');
 
 
 class TripPage extends Component {
@@ -11,9 +11,9 @@ class TripPage extends Component {
 
   static contextType = AuthContext;
 
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount() {
 		//this.fetchEvents();
