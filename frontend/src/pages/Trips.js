@@ -1,109 +1,76 @@
 import React, { Component } from 'react';
-
 import AuthContext from '../context/auth-context';
-import './Events.css';
+import './Trips.css';
 //const axios = require('axios');
 
-
 class TripPage extends Component {
-  state = {
-  };
+	state = { destinations: [] };
 
-  static contextType = AuthContext;
+	static contextType = AuthContext;
 
-  // constructor(props) {
-  //   super(props);
-  // }
-
-  componentDidMount() {
-		//this.fetchEvents();
-		// fetch("https://api.travelpayouts.com/data/cities.json",
-		//  {
-		// 	 credentials:"include",
-		// 		 headers:{
-		// 		 'X-Access-Token': '269dd9a31218fab6b4e5eb7d10c41003'
-		// 		},
-		// 		referrerPolicy:"no-referrer-when-downgrade",
-		// 		body:null,
-		// 		method:"GET",
-		// 		mode:"no-cors"})
-		// .then(res => {
-		// 	if (res.success !== true) {
-		// 		throw new Error(res);
-		// 	}
-		// 	return res.json();
-		// })
-		// .then(resData => {
-		// 	console.log('primera opcion',resData)
-		// })
-		// .catch(err => {
-		// 	console.log('primera opcion',JSON.stringify(err));
-		// });
-		// fetch("https://api.travelpayouts.com/v1/prices/cheap?origin=MOW&destination=HKT&depart_date=2019-11&return_date=2019-12&token=269dd9a31218fab6b4e5eb7d10c41003",
-		//  {
-		// 		 headers:{
-		// 		 'X-Access-Token': '269dd9a31218fab6b4e5eb7d10c41003'
-		// 		},
-		// 		method:"GET",
-		// 		mode:"no-cors"})
-		// .then(res => {
-		// 	if (res.success !== true) {
-		// 		throw new Error(res);
-		// 	}
-		// 	return res.json();
-		// })
-		// .then(resData => {
-		// 	console.log('tercera opcion',resData)
-		// })
-		// .catch(err => {
-		// 	console.log('tercera opcion',JSON.stringify(err));
-		// });
+	componentDidMount() {
+		this.fetchTrips();
 	}
 
-
-	
-	fetchEvents() {
+	fetchTrips() {
 		const requestBody = {
-			origin:"MOW",
-			destination:"HKT",
-			depart_date:"2019-11",
-			return_date:"2019-12"	
-		};
-		fetch("https://api.travelpayouts.com/v1/prices/cheap",
-		 { 
-				cache: 'default',
-				method: 'get',
-				body: JSON.stringify(requestBody),
-				mode: 'cors',
-				accept: 'application/json',
-				headers : {
-					'x-access-token': '269dd9a31218fab6b4e5eb7d10c41003'
+			query: `
+				query { 
+					trips(origin:"Barcelona") {
+						origin,
+						destination,
+						price
+					}
 				}
-			})
-		.then(res => {
-        if (res.success !== true) {
-          throw new Error(res);
-        }
-        return res.json();
-      })
-      .then(resData => {
-				console.log('Segunda opcion',resData)
-      })
-      .catch(err => {
-        console.log('Segunda err',JSON.stringify(err));
-      });
-	}
-	
-  componentWillUnmount() {
-  }
+			`,
+		};
 
-  render() {
-    return (
-      <React.Fragment>
-        Destination
+		fetch('http://localhost:8000/graphql', {
+			method: 'POST',
+			body: JSON.stringify(requestBody),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+			.then(res => {
+				if (res.status !== 200 && res.status !== 201) {
+					throw new Error('Failed!');
+				}
+				return res.json();
+			})
+			.then(resData => {
+				const trips = resData.data.trips;
+				this.setState({ destinations: trips });
+				console.log(trips);
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	}
+
+	componentWillUnmount() {}
+
+	render() {
+		const { destinations } = this.state;
+		return (
+			<React.Fragment>
+				Destination
+				<div>
+					{destinations
+						? destinations.map((destination, key) => {
+								return (
+									<div key={key} className={'trip_info_block'}>
+										<h6 className={'trip_info'}>{destination.origin}</h6>
+										<h6 className={'trip_info'}>{destination.destination}</h6>
+										<h6 className={'trip_info'}>{destination.price}€</h6>
+									</div>
+								);
+						  })
+						: null}
+				</div>
 			</React.Fragment>
-    );
-  }
+		);
+	}
 }
 
 export default TripPage;
