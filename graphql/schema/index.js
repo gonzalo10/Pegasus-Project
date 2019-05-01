@@ -17,8 +17,9 @@ type Event {
   creator: User!
 }
 type Trip {
-  _id: ID!
   origin: String!
+  destination: String!
+  price: Float!
 }
 type User {
   _id: ID!
@@ -43,7 +44,7 @@ input UserInput {
 }
 type RootQuery {
     events: [Event!]!
-    trips: [Trip!]!
+    trips(origin: String!): [Trip!]!
     bookings: [Booking!]!
     login(email: String!, password: String!): AuthData!
 }
