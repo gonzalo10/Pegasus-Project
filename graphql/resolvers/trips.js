@@ -1,9 +1,12 @@
 const Axios = require('axios');
 const Trip = require('../../models/trip');
+//const citiesCodes = require('../../citiesInfo');
+var citiesCodes = require('../../citiesInfo');
+const token = '269dd9a31218fab6b4e5eb7d10c41003';
 module.exports = {
 	trips: async args => {
 		const results = await Axios.get(
-			'http://api.travelpayouts.com/v1/city-directions?origin=BCN&currency=eur&token=269dd9a31218fab6b4e5eb7d10c41003'
+			`http://api.travelpayouts.com/v1/city-directions?origin=BCN&currency=eur&token=${token}`
 		)
 			.then(response => {
 				const popularDestinationsInfo = response.data.data;
@@ -24,7 +27,21 @@ module.exports = {
 			.catch(error => {
 				console.log(error);
 			});
-		console.log(results);
+		const cities = citiesCodes.cities;
+		// const cities = citiesCodes;
+		console.log(cities);
+		const cities_ITA_Code = await Axios.get(
+			'http://api.travelpayouts.com/data/en/cities.json'
+		)
+			.then(result => {
+				const cities_data = result.data;
+
+				return result.data;
+			})
+			.catch(error => {
+				console.log(err);
+			});
+		//console.log(results);
 		return results;
 	},
 };
