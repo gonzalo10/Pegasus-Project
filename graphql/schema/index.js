@@ -20,6 +20,8 @@ type Trip {
   origin: String!
   destination: String!
   price: Float!
+  departure_at: String!
+  return_at: String!
 }
 type User {
   _id: ID!
