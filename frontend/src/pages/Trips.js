@@ -16,7 +16,7 @@ class TripPage extends Component {
 		const requestBody = {
 			query: `
 				query { 
-					trips(origin:"Barcelona") {
+					trips(origin:"Madrid") {
 						origin,
 						destination,
 						price
@@ -43,7 +43,6 @@ class TripPage extends Component {
 			.then(resData => {
 				const trips = resData.data.trips;
 				this.setState({ destinations: trips });
-				console.log(trips);
 			})
 			.catch(err => {
 				console.log(err);
@@ -58,18 +57,17 @@ class TripPage extends Component {
 			<React.Fragment>
 				Destination
 				<div>
-					{console.log(destinations)}
 					{destinations ? (
 						destinations.map((destination, key) => {
 							return (
 								<div key={key} className="grid-container trip_info_block">
 									<div className="item1">{destination.origin}</div>
 									<div className="item2">{destination.destination}</div>
-									<div className="item3">Price:{destination.price}€</div>
+									<div className="item3">Price: {destination.price}€</div>
 									<div className="item4">
-										Departure:{destination.departure_at}
+										Departure: {destination.departure_at}
 									</div>
-									<div className="item5">Return:{destination.return_at}</div>
+									<div className="item5">Return: {destination.return_at}</div>
 								</div>
 							);
 						})
