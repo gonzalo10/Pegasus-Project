@@ -15,6 +15,14 @@ const tripSchema = new Schema({
 		type: Number,
 		required: true,
 	},
+	departure_at: {
+		type: String,
+		required: true,
+	},
+	return_at: {
+		type: String,
+		required: true,
+	},
 });
 
 module.exports = mongoose.model('Trip', tripSchema);
