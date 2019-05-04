@@ -20,6 +20,8 @@ class TripPage extends Component {
 						origin,
 						destination,
 						price
+						departure_at
+						return_at
 					}
 				}
 			`,
@@ -56,17 +58,24 @@ class TripPage extends Component {
 			<React.Fragment>
 				Destination
 				<div>
-					{destinations
-						? destinations.map((destination, key) => {
-								return (
-									<div key={key} className={'trip_info_block'}>
-										<h6 className={'trip_info'}>{destination.origin}</h6>
-										<h6 className={'trip_info'}>{destination.destination}</h6>
-										<h6 className={'trip_info'}>{destination.price}€</h6>
+					{console.log(destinations)}
+					{destinations ? (
+						destinations.map((destination, key) => {
+							return (
+								<div key={key} className="grid-container trip_info_block">
+									<div className="item1">{destination.origin}</div>
+									<div className="item2">{destination.destination}</div>
+									<div className="item3">Price:{destination.price}€</div>
+									<div className="item4">
+										Departure:{destination.departure_at}
 									</div>
-								);
-						  })
-						: null}
+									<div className="item5">Return:{destination.return_at}</div>
+								</div>
+							);
+						})
+					) : (
+						<div>Loading...</div>
+					)}
 				</div>
 			</React.Fragment>
 		);
