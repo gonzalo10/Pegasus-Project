@@ -1,6 +1,8 @@
 const Trip = require('../../models/trip');
-const wishlist = require('../../models/wishlist');
-const { transformBooking, transformEvent } = require('./merge');
+const Wishlist = require('../../models/wishlist');
+const { transformEvent, transformWishlist } = require('./merge');
+
+// this is not working
 
 module.exports = {
 	wishlist: async (args, req) => {
@@ -8,28 +10,28 @@ module.exports = {
 			throw new Error('Unauthenticated!');
 		}
 		try {
-			const bookings = await Booking.find();
-			return bookings.map(booking => {
-				return transformBooking(booking);
+			const wishlist = await Wishlist.find();
+			return wishlist.map(wishlist => {
+				return transformWishlist(wishlist);
 			});
 		} catch (err) {
 			throw err;
 		}
 	},
-	saveTrip: async (args, req) => {
-		if (!req.isAuth) {
-			throw new Error('Unauthenticated!');
-		}
-		const fetchedEvent = await Event.findOne({
-			_id: args.eventId,
-		});
-		const booking = new Booking({
-			user: req.userId,
-			event: fetchedEvent,
-		});
-		const result = await booking.save();
-		return transformBooking(result);
-	},
+	// saveTrip: async (args, req) => {
+	// 	if (!req.isAuth) {
+	// 		throw new Error('Unauthenticated!');
+	// 	}
+	// 	const fetchedTrip = await Trip.findOne({
+	// 		_id: args.tripId,
+	// 	});
+	// 	const wishlist = new Wishlist({
+	// 		user: req.userId,
+	// 		trip: fetchedTrip,
+	// 	});
+	// 	const result = await wishlist.save();
+	// 	return transformWishlist(result);
+	// },
 	cancelTrip: async (args, req) => {
 		if (!req.isAuth) {
 			throw new Error('Unauthenticated!');

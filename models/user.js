@@ -17,6 +17,12 @@ const userSchema = new Schema({
 			ref: 'Event',
 		},
 	],
+	savedTrips: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Trip',
+		},
+	],
 });
 
 module.exports = mongoose.model('User', userSchema);
