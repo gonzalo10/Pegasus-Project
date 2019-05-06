@@ -8,6 +8,13 @@ type Booking {
   createdAt: String!
   updatedAt: String!
 }
+type WishList {
+  _id: ID!
+  trip: Trip!
+  user: User!
+  createdAt: String!
+  updatedAt: String!
+}
 type Event {
   _id: ID!
   title: String!
@@ -17,6 +24,7 @@ type Event {
   creator: User!
 }
 type Trip {
+  _id: ID!
   origin: String!
   destination: String!
   price: Float!

@@ -28,6 +28,7 @@ module.exports = {
 						departure_at: specificTripInfo.departure_at,
 						return_at: specificTripInfo.return_at,
 					});
+					// trip.save();
 					tripList.push(trip);
 				}
 				return tripList;

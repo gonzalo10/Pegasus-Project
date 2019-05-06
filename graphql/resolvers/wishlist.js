@@ -1,9 +1,9 @@
-const Event = require('../../models/event');
-const Booking = require('../../models/booking');
+const Trip = require('../../models/trip');
+const wishlist = require('../../models/wishlist');
 const { transformBooking, transformEvent } = require('./merge');
 
 module.exports = {
-	bookings: async (args, req) => {
+	wishlist: async (args, req) => {
 		if (!req.isAuth) {
 			throw new Error('Unauthenticated!');
 		}
@@ -16,7 +16,7 @@ module.exports = {
 			throw err;
 		}
 	},
-	bookEvent: async (args, req) => {
+	saveTrip: async (args, req) => {
 		if (!req.isAuth) {
 			throw new Error('Unauthenticated!');
 		}
@@ -30,7 +30,7 @@ module.exports = {
 		const result = await booking.save();
 		return transformBooking(result);
 	},
-	cancelBooking: async (args, req) => {
+	cancelTrip: async (args, req) => {
 		if (!req.isAuth) {
 			throw new Error('Unauthenticated!');
 		}
