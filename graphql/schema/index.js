@@ -8,6 +8,13 @@ type Booking {
   createdAt: String!
   updatedAt: String!
 }
+type WishList {
+  _id: ID!
+  trip: Trip!
+  user: User!
+  createdAt: String!
+  updatedAt: String!
+}
 type Event {
   _id: ID!
   title: String!
@@ -17,17 +24,20 @@ type Event {
   creator: User!
 }
 type Trip {
+  _id: ID!
   origin: String!
   destination: String!
   price: Float!
   departure_at: String!
   return_at: String!
+  creator: User!
 }
 type User {
   _id: ID!
   email: String!
   password: String
   createdEvents: [Event!]
+  savedTrips: [Trip!]
 }
 type AuthData {
   userId: ID!
@@ -39,6 +49,13 @@ input EventInput {
   description: String!
   price: Float!
   date: String!
+}
+input TripInput {
+  origin: String!
+  destination: String!
+  price: Float!
+  departure_at: String!
+  return_at: String!
 }
 input UserInput {
   email: String!
@@ -52,6 +69,7 @@ type RootQuery {
 }
 type RootMutation {
     createEvent(eventInput: EventInput): Event
+    saveTrip(tripInput: TripInput): Trip
     createUser(userInput: UserInput): User
     bookEvent(eventId: ID!): Booking!
     cancelBooking(bookingId: ID!): Event!
