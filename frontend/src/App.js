@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import AuthPage from './pages/Auth/Auth';
 import BookingsPage from './pages/Bookings/Bookings';
-import EventsPage from './pages/Events/Events';
+import FrontPage from './pages/FrontPage/FrontPage';
+
 import TripsPage from './pages/Trips/Trips';
 import MainNavigation from './components/Navigation/MainNavigation';
 import AuthContext from './context/auth-context';
@@ -44,7 +45,7 @@ class App extends Component {
                 {!this.state.token && (
                   <Route path="/auth" component={AuthPage} />
                   )}
-                <Route path="/events" component={EventsPage} />
+                <Route path="/" component={FrontPage} />
                 <Route path="/trips" component={TripsPage} />
                 {this.state.token && (
                   <Route path="/bookings" component={BookingsPage} />
