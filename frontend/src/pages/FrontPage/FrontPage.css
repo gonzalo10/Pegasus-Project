@@ -1,5 +1,6 @@
  /* Split the screen in half */
 .split {
+    margin-top: 40px;
     height: 100%;
     width: 50%;
     position: fixed;

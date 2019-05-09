@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
-import Events from '../../containers/Events/Events';
+
 import IntroPage from '../../containers/IntroPage/IntroPage';
 import './FrontPage.css';
+import RecommendTravel from '../../containers/RecomendTravel/RecomendTravel';
  
 class FrontPage extends Component {
     render () {
@@ -12,7 +13,7 @@ class FrontPage extends Component {
                     <IntroPage />
                 </div>
                 <div className='split right'>
-                    <Events />
+                    <RecommendTravel />
                 </div>
             </React.Fragment>
         )
