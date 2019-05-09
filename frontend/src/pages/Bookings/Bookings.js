@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import Spinner from '../components/Spinner/Spinner';
-import AuthContext from '../context/auth-context';
-import BookingList from '../components/Bookings/BookingList/BookingList';
-import BookingsChart from '../components/Bookings/BookingsChart/BookingsChart';
-import BookingsControls from '../components/Bookings/BookingsControls/BookingsControls';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import AuthContext from '../../context/auth-context';
+import BookingList from '../../components/Bookings/BookingList/BookingList';
+import BookingsChart from '../../components/Bookings/BookingsChart/BookingsChart';
+import BookingsControls from '../../components/Bookings/BookingsControls/BookingsControls';
 
 class BookingsPage extends Component {
   state = {

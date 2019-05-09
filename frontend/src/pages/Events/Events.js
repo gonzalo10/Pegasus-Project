@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import Modal from '../components/Modal/modal';
-import Backdrop from '../components/Backdrop/Backdrop';
-import EventList from '../components/Events/EventList/EventList';
-import Spinner from '../components/Spinner/Spinner';
-import AuthContext from '../context/auth-context';
+import Modal from '../../components/UI/Modal/modal';
+import Backdrop from '../../components/UI/Backdrop/Backdrop';
+import EventList from '../../components/Events/EventList/EventList';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import AuthContext from '../../context/auth-context';
 import { Link } from 'react-router-dom';
 
 import './Events.css';
