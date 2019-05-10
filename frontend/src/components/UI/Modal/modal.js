@@ -3,6 +3,7 @@ import React from 'react';
 import './modal.css';
 
 const modal = props => (
+  
   <div className="modal">
     <header className="modal__header">
       <h1>{props.title}</h1>

@@ -3,12 +3,14 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import AuthPage from './pages/Auth/Auth';
 import BookingsPage from './pages/Bookings/Bookings';
-import EventsPage from './pages/Events/Events';
+import FrontPage from './pages/FrontPage/FrontPage';
+import EventsPage from './containers/Events/Events'
 import TripsPage from './pages/Trips/Trips';
 import MainNavigation from './components/Navigation/MainNavigation';
 import AuthContext from './context/auth-context';
 
 import './App.css';
+
 
 class App extends Component {
   state = {
@@ -25,6 +27,7 @@ class App extends Component {
   };
 
   render() {
+    // pasar por redux los valores de AuthContext
     return (
       <BrowserRouter>
         <React.Fragment>
@@ -39,12 +42,13 @@ class App extends Component {
             <MainNavigation />
             <main className="main-content">
               <Switch>
-                {this.state.token && <Redirect from="/" to="/events" exact />}
+                {/* {this.state.token && <Redirect from="/" to="/events" exact />} */}
                 {this.state.token && <Redirect from="/auth" to="/events" exact />}
                 {!this.state.token && (
                   <Route path="/auth" component={AuthPage} />
                   )}
                 <Route path="/events" component={EventsPage} />
+                <Route path="/" component={FrontPage} />
                 <Route path="/trips" component={TripsPage} />
                 {this.state.token && (
                   <Route path="/bookings" component={BookingsPage} />
