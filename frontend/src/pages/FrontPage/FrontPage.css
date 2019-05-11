@@ -1,6 +1,6 @@
  /* Split the screen in half */
-.split {
-    margin-top: 40px;
+.splitLeft {
+    margin-top: 50px;
     height: 100%;
     width: 50%;
     position: fixed;
@@ -8,16 +8,20 @@
     top: 0;
     overflow-x: hidden;
     padding-top: 20px;
+    left:0;
   }
-  
-/* Control the left side  */
-.left {
-    left: 0;
 
-  } 
-  
-/* Control the right side  */
-.right {
-    right: 0;
+.splitRight {
+    margin-top: 50px;
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+    right:0;
+  }
 
-  } 
+  
+

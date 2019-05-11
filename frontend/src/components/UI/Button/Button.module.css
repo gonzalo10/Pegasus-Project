@@ -1,0 +1,12 @@
+.button {
+    /* margin: theme.spacing.unit; */
+    display: flex;
+  align-items: center;
+  justify-content: center;
+    height: 90%;
+    width: 100%
+  }
+
+.input {
+    display: none;
+  }

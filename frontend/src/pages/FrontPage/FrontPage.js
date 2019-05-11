@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 
 
 import IntroPage from '../../containers/IntroPage/IntroPage';
+import PaperSheet from '../../components/UI/PaperSheet/PaperSheet'
+
 import './FrontPage.css';
-import RecommendTravel from '../../containers/RecomendTravel/RecomendTravel';
  
 class FrontPage extends Component {
     render () {
         return(
             <React.Fragment>
-                <div className='split left'>
+                <div className='splitLeft'>
                     <IntroPage />
                 </div>
-                <div className='split right'>
-                    <RecommendTravel />
+                <div className='splitRight'>
+                    <PaperSheet/>
                 </div>
             </React.Fragment>
         )
