@@ -10,12 +10,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 
 const suggestions = [
-  { label: 'Andorra' },
-  { label: 'Antarctica' },
-  { label: 'Argentina' },
-  { label: 'Australia' },
-  { label: 'Austria' },
-  { label: 'Belgium' },
+  { label: 'Madrid' },
+  { label: 'Barcelona' },
+  { label: 'Milan' },
+  { label: 'Roma' },
+  { label: 'London' },
+  { label: 'Paris' },
+  { label: 'Berlin' },
+  { label: 'Oslo' },
+  { label: 'Seoul' },
+  { label: 'Pekin' },
+  { label: 'Tokyo' },
 
 ];
 
