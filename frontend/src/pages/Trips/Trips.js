@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import AuthContext from '../../context/auth-context';
 import './Trips.css';
+import PaperSheet from '../../components/UI/PaperSheet/PaperSheet'
+import Grid from '@material-ui/core/Grid';
+
 //const axios = require('axios');
 
 class TripPage extends Component {
@@ -55,20 +58,33 @@ class TripPage extends Component {
 		const { destinations } = this.state;
 		return (
 			<React.Fragment>
-				Destination
+				<PaperSheet />
 				<div>
 					{destinations ? (
 						destinations.map((destination, key) => {
 							return (
-								<div key={key} className="grid-container trip_info_block">
-									<div className="item1">{destination.origin}</div>
-									<div className="item2">{destination.destination}</div>
-									<div className="item3">Price: {destination.price}€</div>
-									<div className="item4">
-										Departure: {destination.departure_at}
-									</div>
-									<div className="item5">Return: {destination.return_at}</div>
-								</div>
+								<Grid key={key} className='border' container spacing={24}>
+       								<Grid  item xs={4} >
+										<div className="city">{destination.origin}</div>
+										-->
+										<div className="city">{destination.destination}</div>
+										</Grid>
+										<Grid  item xs={4} >
+										<div className="item3">Price: {destination.price}€</div>
+										</Grid>
+										<Grid  item xs={4} >
+										<div className="item4">
+											Departure: {destination.departure_at}
+										</div>
+										</Grid>
+										<Grid  item xs={4} >
+										<div className="item5">Return: {destination.return_at}</div>
+										</Grid>
+
+        						</Grid>
+								// <div key={key} className="grid-container trip_info_block">
+									
+								// </div>
 							);
 						})
 					) : (

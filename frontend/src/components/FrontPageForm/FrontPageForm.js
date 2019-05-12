@@ -27,7 +27,7 @@ function CenteredGrid(props) {
                     </AutoComplete>
                 </Grid>
                 <Grid item xs={3}>
-                    <Button><NavigationIcon fontSize="small" />Go!</Button>
+                    <Button onClick={props.clicked} ><NavigationIcon fontSize="small" />Go!</Button>
                 </Grid>
             </Grid>
         </form>

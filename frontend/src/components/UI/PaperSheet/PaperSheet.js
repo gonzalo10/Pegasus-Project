@@ -6,13 +6,19 @@ import Typography from '@material-ui/core/Typography';
 import FrontPageForm from '../../FrontPageForm/FrontPageForm'
 
 const styles = theme => ({
+  // root: {
+  //   ...theme.mixins.gutters(),
+  //   paddingTop: theme.spacing.unit * 2,
+  //   paddingBottom: theme.spacing.unit * 2,
+  //   marginLeft: '2%',
+  //   marginRight: '10%',
+  //   marginTop: '40%',
+  // },
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    marginLeft: '2%',
-    marginRight: '10%',
-    marginTop: '40%',
+    margin: '10%',
   },
 
   Typo: {
@@ -29,7 +35,7 @@ function PaperSheet(props) {
         <Typography variant="h5" component="h3" className={classes.Typo}>
             <em>Where Is Going To Be Your Next Adventure?</em>
         </Typography>
-        <FrontPageForm />
+        <FrontPageForm clicked={props.clicked}/>
       </Paper>
     </div>
   );
