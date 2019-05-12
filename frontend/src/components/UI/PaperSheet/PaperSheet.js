@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import FrontPageForm from '../../FrontPageForm/FrontPageForm'
+import FrontPageForm from '../../../containers/FrontPageForm/FrontPageForm'
 
 const styles = theme => ({
   // root: {

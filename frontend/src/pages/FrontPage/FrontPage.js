@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 
 
-import IntroPage from '../../containers/IntroPage/IntroPage';
+import IntroPage from '../../containers/FrontPageIntro/FrontPageIntro';
 import PaperSheet from '../../components/UI/PaperSheet/PaperSheet'
 
 import './FrontPage.css';
  
 class FrontPage extends Component {
+
+    componentWillUpdate () {
+        console.log(this.props.handleValue)
+    }
     
     handleTrips = () => {
         this.props.history.push('/trips')
@@ -20,7 +24,7 @@ class FrontPage extends Component {
                     <IntroPage />
                 </div>
                 <div className='splitRight'>
-                    <PaperSheet clicked={this.handleTrips}/>
+                    <PaperSheet clicked={this.handleTrips} value={this.props.handleValue} />
                 </div>
             </React.Fragment>
         )

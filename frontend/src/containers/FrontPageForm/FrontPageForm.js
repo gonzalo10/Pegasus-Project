@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Button from './../UI/Button/Button'
-import AutoComplete from '../UI/AutoComplete/AutoComplete'
+import Button from '../../components/UI/Button/Button'
+import AutoComplete from '../../components/UI/AutoComplete/AutoComplete'
 
 
 import PropTypes from 'prop-types';
@@ -23,11 +23,10 @@ function CenteredGrid(props) {
                     <FlightTakeoff fontSize="large" className='box'/>
                 </Grid>
                 <Grid item xs={7}>
-                    <AutoComplete>
-                    </AutoComplete>
+                    <AutoComplete />
                 </Grid>
                 <Grid item xs={3}>
-                    <Button onClick={props.clicked} ><NavigationIcon fontSize="small" />Go!</Button>
+                    <Button clicked={props.clicked} value={props.value} ><NavigationIcon fontSize="small" />Go!</Button>
                 </Grid>
             </Grid>
         </form>

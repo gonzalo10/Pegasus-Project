@@ -9,6 +9,8 @@ import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 
+
+
 const suggestions = [
   { label: 'Madrid' },
   { label: 'Barcelona' },
@@ -122,7 +124,6 @@ const styles = theme => ({
 class IntegrationAutosuggest extends React.Component {
   state = {
     single: '',
-    popper: '',
     suggestions: [],
   };
 

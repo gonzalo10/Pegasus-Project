@@ -3,6 +3,9 @@ import AuthContext from '../../context/auth-context';
 import './Trips.css';
 import PaperSheet from '../../components/UI/PaperSheet/PaperSheet'
 import Grid from '@material-ui/core/Grid';
+import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt'
+import Madrid from '../../assets/img/Madrid.png'
+
 
 //const axios = require('axios');
 
@@ -66,18 +69,24 @@ class TripPage extends Component {
 								<Grid key={key} className='border' container spacing={24}>
        								<Grid  item xs={4} >
 										<div className="city">{destination.origin}</div>
-										-->
+										<ArrowRightAlt fontSize="medium"/>
 										<div className="city">{destination.destination}</div>
-										</Grid>
-										<Grid  item xs={4} >
-										<div className="item3">Price: {destination.price}€</div>
-										</Grid>
-										<Grid  item xs={4} >
+									</Grid>
+									<Grid  item xs={4} >
+										<div className="city">Price: {destination.price}€</div>
+									</Grid>
+									<Grid  item xs={4} >
+										<img src={Madrid} />
+									</Grid>
+
+								<Grid />
+								<Grid key={key} container spacing={6}></Grid>
+										<Grid  item xs={3} >
 										<div className="item4">
 											Departure: {destination.departure_at}
 										</div>
 										</Grid>
-										<Grid  item xs={4} >
+										<Grid  item xs={3} >
 										<div className="item5">Return: {destination.return_at}</div>
 										</Grid>
 

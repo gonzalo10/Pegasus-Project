@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Monkey from '../../assets/img/Monkey.gif'
-import './IntroPage.css'
+import './FrontPageIntro.css'
  
 const introPage = (props) => {
     return(
