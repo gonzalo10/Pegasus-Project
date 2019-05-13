@@ -55,7 +55,7 @@
   vertical-align: middle;
   margin: 0;
 }
-.main-navigation__logo h1:hover,
+
 .main-navigation__items a:hover,
 .main-navigation__items a:active,
 .main-navigation__items a.active,
@@ -64,4 +64,11 @@
   background: #ffffff;
   color: #3fd1fd;
   border-radius: 5px;
+}
+
+.main-navigation__logo h1:hover{
+  background: #ffffff;
+  color: #08b7ec;
+  border-radius: 5px;
+  padding: 3px
 }
