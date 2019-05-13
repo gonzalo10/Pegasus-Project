@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 
 import IntroPage from '../../containers/FrontPageIntro/FrontPageIntro';
 import PaperSheet from '../../components/UI/PaperSheet/PaperSheet'
+import FrontBackground from '../../assets/img/FrontBackground.png'
+
 
 import './FrontPage.css';
  
@@ -15,20 +17,25 @@ class FrontPage extends Component {
     handleTrips = () => {
         this.props.history.push('/trips')
     }
+
+    
     
     render () {
 
+
         return(
-            <React.Fragment>
+            <div className='background'>
                 <div className='splitLeft'>
                     <IntroPage />
                 </div>
                 <div className='splitRight'>
                     <PaperSheet clicked={this.handleTrips} value={this.props.handleValue} />
                 </div>
-            </React.Fragment>
+            </div>
         )
     }
 }
+
+
  
 export default FrontPage;

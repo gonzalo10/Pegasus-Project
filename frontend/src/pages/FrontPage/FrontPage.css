@@ -23,5 +23,13 @@
     right:0;
   }
 
+  .background {
+
+    background-image: url("/img/FrontBackground.png");
+    background-size:contain;
+    background-position:top;
+    background: cover;
+  }
+
   
 
