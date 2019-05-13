@@ -7,10 +7,16 @@
 	margin-bottom: 10px;
 	padding: 5px;
 } */
+.date {
+
+}
+
 .border {
 	border: 1px solid black;
 	margin-bottom: 30px;
 	padding: 20px;
+	box-shadow: 8px 8px 10px #aaa;
+
 
 }
 
@@ -42,9 +48,6 @@
 .grid {
 	width: 90%;
 }
-.Upgrid {
-	height: 100%
-}
 
 .container {
 	position: relative;
@@ -75,6 +78,7 @@
 	color: white;
 	font-size: 16px;
 	padding: 16px 32px;
+
   }
 
   .image {
@@ -88,6 +92,7 @@
 	backface-visibility: hidden;
 	border: 1px solid white;
 	box-shadow: 8px 8px 10px #aaa;
+	z-index: -1
 }
 
 

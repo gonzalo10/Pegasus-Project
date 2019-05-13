@@ -68,7 +68,7 @@ class TripPage extends Component {
 							return (
 								<div key={key} className='main-wrap border'>
 								<div className='sidebar'>
-								<Grid className='Upgrid' container spacing={24}>
+								<Grid container spacing={24}>
        								<Grid  item xs={4} >
 										<div className="city">{destination.origin}</div>
 										<ArrowRightAlt fontSize="large"/>
@@ -78,10 +78,10 @@ class TripPage extends Component {
 										<div className="city">Price: {destination.price}€</div>
 									</Grid>
 								</Grid>
-								<Grid container spacing={24}>
+								<Grid container className='date' spacing={24}>
 									<Grid  item xs={3} >
 										<div className="item4">
-											Departure: {destination.departure_at}
+											Departure: new Date({destination.departure_at})
 										</div>
 									</Grid>
 									<Grid  item xs={3} >
@@ -92,7 +92,7 @@ class TripPage extends Component {
 								</div>
 								<div className='content-wrap'>
 									<div className='container'>
-  										<img src={Madrid} alt="Avatar" className="image" />
+  										<img src={Madrid} alt="City" className="image" />
   										<div className="middle">
    						 					<div className="text">Madrid</div>
  										</div>
