@@ -66,34 +66,43 @@ class TripPage extends Component {
 					{destinations ? (
 						destinations.map((destination, key) => {
 							return (
-								<Grid key={key} className='border' container spacing={24}>
+								<div key={key} className='main-wrap border'>
+								<div className='sidebar'>
+								<Grid className='Upgrid' container spacing={24}>
        								<Grid  item xs={4} >
 										<div className="city">{destination.origin}</div>
-										<ArrowRightAlt fontSize="medium"/>
+										<ArrowRightAlt fontSize="large"/>
 										<div className="city">{destination.destination}</div>
 									</Grid>
 									<Grid  item xs={4} >
 										<div className="city">Price: {destination.price}€</div>
 									</Grid>
-									<Grid  item xs={4} >
-										<img src={Madrid} />
-									</Grid>
-
-								<Grid />
-								<Grid key={key} container spacing={6}></Grid>
-										<Grid  item xs={3} >
+								</Grid>
+								<Grid container spacing={24}>
+									<Grid  item xs={3} >
 										<div className="item4">
 											Departure: {destination.departure_at}
 										</div>
-										</Grid>
-										<Grid  item xs={3} >
+									</Grid>
+									<Grid  item xs={3} >
 										<div className="item5">Return: {destination.return_at}</div>
-										</Grid>
+									</Grid>
 
         						</Grid>
-								// <div key={key} className="grid-container trip_info_block">
+								</div>
+								<div className='content-wrap'>
+									<div className='container'>
+  										<img src={Madrid} alt="Avatar" className="image" />
+  										<div className="middle">
+   						 					<div className="text">Madrid</div>
+ 										</div>
+									</div>
+								</div>
+								{/* <div key={key} className="grid-container trip_info_block">
 									
-								// </div>
+								</div> */}
+
+								</div>
 							);
 						})
 					) : (
