@@ -1,52 +1,78 @@
-import React from 'react';
-
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 import Button from '../../components/UI/Button/Button'
 import AutoComplete from '../../components/UI/AutoComplete/AutoComplete'
-
-
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import FlightTakeoff from '@material-ui/icons/FlightTakeoff'
 import NavigationIcon from '@material-ui/icons/Navigation';
+import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 import './FrontPageForm.css';
+import { throws } from 'assert';
 
 
-function CenteredGrid(props) {
+class FrontPageForm extends Component {
+  
+  state = {
+    value: '',
+    city: false
+  }
 
-  return (
-    <div className={props.root}>
-        <form >
-            <Grid container spacing={24}>
-                <Grid item xs={2} padding={0}>
-                    <FlightTakeoff fontSize="large" className='box'/>
-                </Grid>
-                <Grid item xs={7}>
-                    <AutoComplete />
-                </Grid>
-                <Grid item xs={3}>
-                    <Button clicked={props.clicked} value={props.value} ><NavigationIcon fontSize="small" />Go!</Button>
-                </Grid>
-            </Grid>
-        </form>
-    </div>
-  );
+  componentDidMount () {
+    console.log(this.props)
+  }
+
+  handleChange = (event) => {
+    event.preventDefault();
+    this.setState({value: event.target.value, city: true});
+    //this.updatePurchaseState( updatedIngredients );
+  }
+  handleSubmit = () => {
+    console.log(this.state.value)
+    this.props.history.push('/trips')
+  }
+  
+  
+ 
+
+
+  render(){
+    return (
+      <Paper className='root' elevation={1}>
+        <Typography variant="h5" component="h3" className='typo'>
+          <em>Where Is Going To Be Your Next Adventure?</em>
+            <div className='roots'>
+                <form >
+                  <Grid container spacing={24}>
+                    <Grid item xs={2} padding={0}>
+                        <FlightTakeoff fontSize="large" className='box'/>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <TextField 
+                          type='text' 
+                          placeholder='Your Homecity' 
+                          name='city' 
+                          onChange={this.handleChange}
+                          value={this.state.value} />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <Button 
+                          clicked={this.handleSubmit}
+                          disabled={!this.state.city} >
+                          <NavigationIcon fontSize="small" />Go!
+                        </Button>
+                    </Grid>
+                  </Grid>
+                </form>
+            </div>
+        </Typography>
+      </Paper>
+    );
+  }
+
 }
 
-const styles = theme => ({
-    root: {
-      flexGrow: 1,
-      marginTop: '20px',
 
-    },
-    border: {
-      border: '1px solid black',
-    }
-  });
-
-CenteredGrid.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(CenteredGrid);
+export default withRouter(FrontPageForm);

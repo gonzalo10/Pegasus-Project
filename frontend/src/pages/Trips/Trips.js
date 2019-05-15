@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import AuthContext from '../../context/auth-context';
 import './Trips.css';
-import PaperSheet from '../../components/UI/PaperSheet/PaperSheet'
 import Grid from '@material-ui/core/Grid';
 import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt'
 import Madrid from '../../assets/img/Madrid.png'
+import Typography from '@material-ui/core/Typography';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import FrontPageForm from '../../containers/FrontPageForm/FrontPageForm';
+
 
 
 //const axios = require('axios');
 
+
 class TripPage extends Component {
-	state = { destinations: [] };
+	state = { destinations: [], city: 'Bangkok' };
 
 	static contextType = AuthContext;
 
@@ -19,6 +23,7 @@ class TripPage extends Component {
 	}
 
 	fetchTrips() {
+		
 		const requestBody = {
 			query: `
 				query { 
@@ -41,12 +46,14 @@ class TripPage extends Component {
 			},
 		})
 			.then(res => {
+				console.log(res)
 				if (res.status !== 200 && res.status !== 201) {
 					throw new Error('Failed!');
 				}
 				return res.json();
 			})
 			.then(resData => {
+				console.log(resData)
 				const trips = resData.data.trips;
 				this.setState({ destinations: trips });
 			})
@@ -61,47 +68,55 @@ class TripPage extends Component {
 		const { destinations } = this.state;
 		return (
 			<React.Fragment>
-				<PaperSheet />
+				<FrontPageForm />
 				<div>
 					{destinations ? (
 						destinations.map((destination, key) => {
+							
 							return (
-								<div key={key} className='main-wrap border'>
-								<div className='sidebar'>
-								<Grid container spacing={24}>
-       								<Grid  item xs={4} >
-										<div className="city">{destination.origin}</div>
-										<ArrowRightAlt fontSize="large"/>
-										<div className="city">{destination.destination}</div>
+								
+								<div key={key}>
+								{ destination.destination === this.state.city ?  
+								<div key={key} className='border'>
+									<Grid container spacing={24}>
+
+										<Grid item md={8}>
+											<Grid item md>
+												<Grid item>
+													{destination.origin}
+													<ArrowRightAlt className='icon' fontSize="large"/>
+													{destination.destination}
+													<ButtonBase className="price">Price: {destination.price}€</ButtonBase>
+												</Grid>
+											</Grid>
+											<Grid container direction="column" justify="center" alignItems="flex-start">
+												<Grid item>
+
+														Departure: {destination.departure_at}
+
+												</Grid>
+												<Grid  item>
+
+														Return: {destination.return_at}
+
+												</Grid>
+											</Grid>
+										</Grid>
+        							
+										<Grid item md={4}>
+											<div className='container'>
+												<img src={Madrid} alt="City" className="imagen" />
+
+												<div className="middle">
+													<div className="text">Madrid</div>
+												</div> 
+											</div>
 									</Grid>
-									<Grid  item xs={4} >
-										<div className="city">Price: {destination.price}€</div>
-									</Grid>
-								</Grid>
-								<Grid container className='date' spacing={24}>
-									<Grid  item xs={3} >
-										<div className="item4">
-											Departure: new Date({destination.departure_at})
-										</div>
-									</Grid>
-									<Grid  item xs={3} >
-										<div className="item5">Return: {destination.return_at}</div>
 									</Grid>
 
-        						</Grid>
-								</div>
-								<div className='content-wrap'>
-									<div className='container'>
-  										<img src={Madrid} alt="City" className="image" />
-  										<div className="middle">
-   						 					<div className="text">Madrid</div>
- 										</div>
-									</div>
-								</div>
-								{/* <div key={key} className="grid-container trip_info_block">
-									
-								</div> */}
+								</div> : null}
 
+							
 								</div>
 							);
 						})

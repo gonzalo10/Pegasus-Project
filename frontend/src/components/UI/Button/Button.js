@@ -6,11 +6,11 @@ import classes from './Button.module.css'
  
 const button = (props) => (
         <Button 
-        variant="outlined" 
-        color="primary" 
-        className={classes.button}
-        disabled={props.disabled}
-        onClick={props.clicked}>
+          variant="outlined" 
+          color="primary" 
+          className={classes.button}
+          disabled={props.disabled}
+          onClick={props.clicked}>
           {props.children}
         </Button>
 

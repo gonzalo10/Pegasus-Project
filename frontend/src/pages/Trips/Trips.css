@@ -8,6 +8,26 @@
 	padding: 5px;
 } */
 
+.price {
+	padding: 7px;
+	margin: 7px
+}
+
+.image {
+	width: 128;
+	height: 128;
+}
+.img {
+	margin: auto;
+	display: block;
+
+}
+
+.icon {
+	position: relative;
+	top: 7px;
+}
+
 .border {
 	border: 1px solid black;
 	border-radius: 5px;
@@ -21,31 +41,13 @@
 .city {
 	display: inline-block;
 	font-family: 'Merriweather', serif;
-	font-size: 1.5em
-
+	font-size: 1.5em;
 }
 
-.main-wrap {
-    /* overflow to handle inner floating block */
-	overflow: hidden;
-	height: 100%;
-}
 
-.sidebar {
-    float: left;
-	width: 70%;
-	height: 100%;
-}
 
-.content-wrap {
-    float: right;
-	width: 30%;
-	height: 100%;
-}
 
-.grid {
-	width: 90%;
-}
+/* Image */
 
 .container {
 	position: relative;
@@ -79,7 +81,7 @@
 	opacity: 1 !important;
   }
 
-  .image {
+  .imagen {
 	opacity: 1;
 	display: block;
 	margin-left: auto;
