@@ -4,7 +4,7 @@ import './Trips.css';
 import Grid from '@material-ui/core/Grid';
 import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt'
 import Madrid from '../../assets/img/Madrid.png'
-import Typography from '@material-ui/core/Typography';
+
 import ButtonBase from '@material-ui/core/ButtonBase';
 import FrontPageForm from '../../containers/FrontPageForm/FrontPageForm';
 
@@ -14,9 +14,23 @@ import FrontPageForm from '../../containers/FrontPageForm/FrontPageForm';
 
 
 class TripPage extends Component {
-	state = { destinations: [], city: 'Bangkok' };
+	state = { 
+		destinations: [], 
+		city: null, 
+	};
+
+	static defaultProps = {
+		params:{}
+	}
+
 
 	static contextType = AuthContext;
+
+	componentWillMount () {
+        const query =  this.props.match.params.id
+		console.log(query)
+        this.setState( { city: query } );
+    }
 
 	componentDidMount() {
 		this.fetchTrips();
@@ -53,8 +67,9 @@ class TripPage extends Component {
 				return res.json();
 			})
 			.then(resData => {
-				console.log(resData)
 				const trips = resData.data.trips;
+				
+				console.log(trips)
 				this.setState({ destinations: trips });
 			})
 			.catch(err => {
@@ -62,68 +77,65 @@ class TripPage extends Component {
 			});
 	}
 
-	componentWillUnmount() {}
+
 
 	render() {
 		const { destinations } = this.state;
-		return (
-			<React.Fragment>
-				<FrontPageForm />
+		let trips = <h1>Spinner</h1>
+		if(this.state.city ){
+			trips = 
 				<div>
-					{destinations ? (
-						destinations.map((destination, key) => {
-							
-							return (
-								
-								<div key={key}>
-								{ destination.destination === this.state.city ?  
-								<div key={key} className='border'>
-									<Grid container spacing={24}>
-
-										<Grid item md={8}>
-											<Grid item md>
-												<Grid item>
+				{destinations.map((destination, key) => {
+					return (
+						<div key={key}>
+						{ destination.origin === this.state.city ?  
+							<div key={key} className='border'>
+								<Grid container spacing={24}>
+									<Grid item md={8}>
+										<Grid item md style={{padding: '15px', fontSize: '1.5em'}}>
+											<Grid container spacing={8}>
+												<Grid item >
 													{destination.origin}
 													<ArrowRightAlt className='icon' fontSize="large"/>
 													{destination.destination}
-													<ButtonBase className="price">Price: {destination.price}€</ButtonBase>
-												</Grid>
-											</Grid>
-											<Grid container direction="column" justify="center" alignItems="flex-start">
-												<Grid item>
-
-														Departure: {destination.departure_at}
-
-												</Grid>
-												<Grid  item>
-
-														Return: {destination.return_at}
-
+												</Grid>	
+												<Grid item >
+													<ButtonBase style={{fontSize: '1.2em'}} fontSize='large'>Price: {destination.price}€</ButtonBase>
 												</Grid>
 											</Grid>
 										</Grid>
-        							
-										<Grid item md={4}>
-											<div className='container'>
-												<img src={Madrid} alt="City" className="imagen" />
-
-												<div className="middle">
-													<div className="text">Madrid</div>
-												</div> 
-											</div>
+										<Grid container direction="column" justify="center" alignItems="flex-start" >
+											<Grid item style={{paddingTop: '35px'}}>
+												Departure: {destination.departure_at}
+											</Grid>
+											<Grid item style={{paddingTop: '35px'}}>
+												Return: {destination.return_at}
+											</Grid>
+										</Grid>
 									</Grid>
+								
+									<Grid item md={4}>
+										<div className='container'>
+											<img src={Madrid} alt="City" className="imagen" />
+
+										<div className="middle">
+											<div className="text">Madrid</div>
+										</div> 
+									</div>
 									</Grid>
-
-								</div> : null}
-
-							
-								</div>
-							);
-						})
-					) : (
-						<div>Loading...</div>
-					)}
+								</Grid>
+							</div> : null}
+						</div>
+						);
+					})
+				}
 				</div>
+		}
+
+		return (
+			<React.Fragment>
+				<FrontPageForm city={this.state.city} />
+				{trips}
 			</React.Fragment>
 		);
 	}

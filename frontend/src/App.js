@@ -48,7 +48,7 @@ class App extends Component {
                   <Route path="/auth" component={AuthPage} />
                   )}
                 <Route path="/events" component={EventsPage} />
-                <Route path="/trips" component={TripsPage} />
+                <Route path="/trips/:id" component={TripsPage} />
                 <Route path="/" component={FrontPage} />
                 {this.state.token && (
                   <Route path="/bookings" component={BookingsPage} />

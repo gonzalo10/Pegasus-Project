@@ -10,14 +10,14 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import './FrontPageForm.css';
-import { throws } from 'assert';
+
 
 
 class FrontPageForm extends Component {
   
   state = {
     value: '',
-    city: false
+    continue: false
   }
 
   componentDidMount () {
@@ -26,18 +26,19 @@ class FrontPageForm extends Component {
 
   handleChange = (event) => {
     event.preventDefault();
-    this.setState({value: event.target.value, city: true});
+    this.setState({value: event.target.value, continue: true});
     //this.updatePurchaseState( updatedIngredients );
   }
+
   handleSubmit = () => {
-    console.log(this.state.value)
-    this.props.history.push('/trips')
-  }
+    // alert('You continue!');
+    const queryParams = [];
+    queryParams.push(this.state.value);
+    this.props.history.push({
+        pathname: ('/trips/' + queryParams)
+    });
+}
   
-  
- 
-
-
   render(){
     return (
       <Paper className='root' elevation={1}>
@@ -47,20 +48,22 @@ class FrontPageForm extends Component {
                 <form >
                   <Grid container spacing={24}>
                     <Grid item xs={2} padding={0}>
-                        <FlightTakeoff fontSize="large" className='box'/>
+                        <FlightTakeoff style={{textAlign: 'center'}} fontSize="large" className='box'/>
                     </Grid>
                     <Grid item xs={7}>
-                        <TextField 
+                        <input 
+                          style={{width: '100%'}}
                           type='text' 
                           placeholder='Your Homecity' 
                           name='city' 
                           onChange={this.handleChange}
-                          value={this.state.value} />
+                          value={this.props.city}
+                           />
                     </Grid>
                     <Grid item xs={3}>
                         <Button 
                           clicked={this.handleSubmit}
-                          disabled={!this.state.city} >
+                          disabled={!this.state.continue} >
                           <NavigationIcon fontSize="small" />Go!
                         </Button>
                     </Grid>
