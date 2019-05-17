@@ -38,6 +38,8 @@ class FrontPageForm extends Component {
         pathname: ('/trips/' + queryParams)
     });
 }
+
+
   
   render(){
     return (
@@ -56,7 +58,7 @@ class FrontPageForm extends Component {
                           type='text' 
                           placeholder='Your Homecity' 
                           name='city' 
-                          onChange={this.handleChange}
+                          onChange={(event) => this.handleChange(event)}
                           value={this.props.city}
                            />
                     </Grid>

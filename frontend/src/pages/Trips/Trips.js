@@ -16,7 +16,8 @@ import FrontPageForm from '../../containers/FrontPageForm/FrontPageForm';
 class TripPage extends Component {
 	state = { 
 		destinations: [], 
-		city: null, 
+		city: null,
+		valu: null,
 	};
 
 	static defaultProps = {
@@ -83,9 +84,12 @@ class TripPage extends Component {
 		const { destinations } = this.state;
 		let trips = <h1>Spinner</h1>
 		if(this.state.city ){
+			this.state.destinations.sort((a, b) => (a.price > b.price) ? 1 : (a.price === b.price) ? ((a.departure > b.departure) ? 1 : -1) : -1 )
+
 			trips = 
 				<div>
 				{destinations.map((destination, key) => {
+					
 					return (
 						<div key={key}>
 						{ destination.origin === this.state.city ?  
@@ -134,7 +138,7 @@ class TripPage extends Component {
 
 		return (
 			<React.Fragment>
-				<FrontPageForm city={this.state.city} />
+				<FrontPageForm />
 				{trips}
 			</React.Fragment>
 		);
