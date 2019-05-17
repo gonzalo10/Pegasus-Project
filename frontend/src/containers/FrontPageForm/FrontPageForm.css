@@ -1,0 +1,28 @@
+.box {
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.roots {
+    flex-grow: 1;
+    margin-top: '20px';
+}
+.border{
+   border: 1px solid black ;
+}
+
+.root {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: '7%';
+    margin-bottom: '2%';
+}
+
+.typo {
+    margin-bottom: 10px,
+}
+
+

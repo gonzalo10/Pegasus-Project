@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
 
 
-import IntroPage from '../../containers/IntroPage/IntroPage';
+import IntroPage from '../../containers/FrontPageIntro/FrontPageIntro';
+
+import FrontBackground from '../../assets/img/FrontBackground.png'
+
+
 import './FrontPage.css';
-import RecommendTravel from '../../containers/RecomendTravel/RecomendTravel';
+import FrontPageForm from '../../containers/FrontPageForm/FrontPageForm';
  
-class FrontPage extends Component {
+class FrontPage extends Component {    
+    
     render () {
         return(
-            <React.Fragment>
-                <div className='split left'>
+            <div className='background'>
+                <div className='splitLeft'>
                     <IntroPage />
                 </div>
-                <div className='split right'>
-                    <RecommendTravel />
+                <div className='splitRight'>
+                    <FrontPageForm />
                 </div>
-            </React.Fragment>
+            </div>
         )
     }
 }
+
+
  
 export default FrontPage;
