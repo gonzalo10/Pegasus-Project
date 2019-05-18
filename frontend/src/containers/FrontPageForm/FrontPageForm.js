@@ -11,8 +11,6 @@ import Typography from '@material-ui/core/Typography';
 
 import './FrontPageForm.css';
 
-
-
 class FrontPageForm extends Component {
   
   state = {
