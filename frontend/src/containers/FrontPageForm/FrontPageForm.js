@@ -32,6 +32,7 @@ class FrontPageForm extends Component {
 
   handleSubmit = () => {
     // alert('You continue!');
+    console.log('ciudada')
     const queryParams = [];
     queryParams.push(this.state.value);
     this.props.history.push({
@@ -76,7 +77,18 @@ class FrontPageForm extends Component {
       </Paper>
     );
   }
+}
 
+const mapStateToProps = state => {
+  return {
+    city: state.city
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    // onChangeCity: (city) =>dispatch(actions.changeCity(city)),
+  }
 }
 
 
