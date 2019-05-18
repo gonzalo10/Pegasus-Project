@@ -1,9 +1,9 @@
-import * as actionTypes from "./actionTypes"
+import * as actionTypes from "./types"
 
 
-export const changeCity = (city) => ({
-    type: actionTypes.CHANGE_CITY,
-    city: city
-})
-
-
+export const storeCity= ( city ) => {
+    return {
+        type: actionTypes.CHANGE_CITY,
+        city: city
+    };
+};

@@ -8,6 +8,9 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import * as actionCreators from '../../actions/cityActions';
+import { connect } from 'react-redux';
+
 
 import './FrontPageForm.css';
 
@@ -19,7 +22,7 @@ class FrontPageForm extends Component {
   }
 
   componentDidMount () {
-    console.log(this.props)
+    console.log(this.props.city)
   }
 
   handleChange = (event) => {
@@ -36,6 +39,13 @@ class FrontPageForm extends Component {
         pathname: ('/trips/' + queryParams)
     });
 }
+
+  
+  componentDidUpdate () {
+      console.log(this.state.continue)
+      console.log(this.state.value)
+  }
+
 
 
   
@@ -57,12 +67,12 @@ class FrontPageForm extends Component {
                           placeholder='Your Homecity' 
                           name='city' 
                           onChange={(event) => this.handleChange(event)}
-                          value={this.props.city}
+                          value={this.state.value}
                            />
                     </Grid>
                     <Grid item xs={3}>
                         <Button 
-                          clicked={this.handleSubmit}
+                          clicked={() => this.props.onStoreCity(this.state.value)}
                           disabled={!this.state.continue} >
                           <NavigationIcon fontSize="small" />Go!
                         </Button>
@@ -76,6 +86,7 @@ class FrontPageForm extends Component {
   }
 }
 
+
 const mapStateToProps = state => {
   return {
     city: state.city
@@ -84,9 +95,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // onChangeCity: (city) =>dispatch(actions.changeCity(city)),
+    onStoreCity: (city) => dispatch(actionCreators.storeCity(city)),
   }
 }
 
 
-export default withRouter(FrontPageForm);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(FrontPageForm));
