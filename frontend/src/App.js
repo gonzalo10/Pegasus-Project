@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { Provider } from 'react-redux';
 
 import AuthPage from './pages/Auth/Auth';
 import BookingsPage from './pages/Bookings/Bookings';
@@ -10,11 +9,11 @@ import EventsPage from './containers/Events/Events'
 import TripsPage from './pages/Trips/Trips';
 import MainNavigation from './components/Navigation/MainNavigation';
 import AuthContext from './context/auth-context';
-import reducer from './store/reducers/city'
+import store from './store'
 
 import './App.css';
 
-const store = createStore(reducer)
+
 
 class App extends Component {
   state = {
