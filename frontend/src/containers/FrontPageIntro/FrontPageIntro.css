@@ -1,15 +1,15 @@
 .IntroPage {
-  width: 100%;
-  margin: auto;
-  margin-top: 30%;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.2rem;
+	width: 100%;
+	font-weight: bold;
+	font-size: 1.2rem;
+	align-items: center;
+	flex-direction: column;
+	display: flex;
 }
 
 img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
 }

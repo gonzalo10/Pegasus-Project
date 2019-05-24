@@ -29,6 +29,7 @@ class EventsPage extends Component {
 	}
 
 	componentDidMount() {
+		console.log(this.props.city);
 		this.fetchEvents();
 	}
 
@@ -53,8 +54,6 @@ class EventsPage extends Component {
 		}
 
 		const event = { title, price, date, description };
-		console.log(event);
-
 		const requestBody = {
 			query: `
           mutation CreateEvent($title: String!, $desc: String!, $price: Float!, $date: String!) {

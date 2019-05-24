@@ -1,4 +1,1 @@
-export {
-    storeCity,
-
-} from "./cityActions"
+export { storeCity } from './cityActions';
