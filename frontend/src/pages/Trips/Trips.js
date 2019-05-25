@@ -5,6 +5,7 @@ import './Trips.css';
 import Grid from '@material-ui/core/Grid';
 import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
 import Madrid from '../../assets/img/Madrid.png';
+import { Link, withRouter } from 'react-router-dom';
 
 import ButtonBase from '@material-ui/core/ButtonBase';
 import FrontPageForm from '../../containers/FrontPageForm/FrontPageForm';
@@ -133,6 +134,14 @@ class TripPage extends React.PureComponent {
 														Return: {destination.return_at}
 													</Grid>
 												</Grid>
+												<Grid
+													container
+													direction="column"
+													justify="center"
+													alignItems="flex-start">
+													<Link to={`/events`}>
+													<button></button></Link>
+												</Grid>
 											</Grid>
 
 											<Grid item md={4}>
@@ -163,4 +172,4 @@ class TripPage extends React.PureComponent {
 	}
 }
 
-export default TripPage;
+export default withRouter(TripPage);
