@@ -1,4 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import * as actionCreators from '../../actions/eventsActions';
+
 
 import AuthContext from '../../context/auth-context';
 import './Trips.css';
@@ -6,8 +11,6 @@ import Grid from '@material-ui/core/Grid';
 import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
 import BookmarkBorder from '@material-ui/icons/BookmarkBorder';
 import Madrid from '../../assets/img/Madrid.png';
-import { Link, withRouter } from 'react-router-dom';
-
 import ButtonBase from '@material-ui/core/ButtonBase';
 import FrontPageForm from '../../containers/FrontPageForm/FrontPageForm';
 
@@ -24,8 +27,11 @@ class TripPage extends React.PureComponent {
 	static contextType = AuthContext;
 
 	componentDidMount() {
+		console.log(this.props)
 		const query = this.props.match.params.id;
 		this.setState({ city: query }, () => this.fetchTrips());
+		console.log(this.props.city)
+		console.log(this.props.key)
 	}
 
 	componentDidUpdate() {
@@ -79,7 +85,7 @@ class TripPage extends React.PureComponent {
 	}
 
 	handleEvents = () => {
-		
+
 	}
 
 	render() {
@@ -144,14 +150,12 @@ class TripPage extends React.PureComponent {
 													direction="column"
 													justify="center"
 													alignItems="flex-start">
-													<Link to={`/events`}>
-													<button onClick={this.handleEvents}>
+													<button onClick={() => this.props.onStoreKey(key)}>
 														<BookmarkBorder
 															className="icon"
 															fontSize="large" />
 																Save
 													</button>
-													</Link>
 												</Grid>
 											</Grid>
 
@@ -183,4 +187,20 @@ class TripPage extends React.PureComponent {
 	}
 }
 
-export default withRouter(TripPage);
+const mapStateToProps = state => {
+	return {
+		key: state.events.key,
+		city: state.city
+	};
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		onStoreKey: (key) => dispatch(actionCreators.storeKey(key)),
+	};
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withRouter(TripPage));

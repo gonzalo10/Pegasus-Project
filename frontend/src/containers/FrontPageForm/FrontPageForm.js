@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import * as actionCreators from '../../actions/cityActions';
+
+
 import Button from '../../components/UI/Button/Button';
 import Grid from '@material-ui/core/Grid';
 import FlightTakeoff from '@material-ui/icons/FlightTakeoff';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import * as actionCreators from '../../actions/cityActions';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+
+
 
 import './FrontPageForm.css';
 
