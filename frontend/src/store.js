@@ -1,6 +1,7 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import reduxThunk from 'redux-thunk';
-import rootReducer from './reducers';
+import cityReducer from './reducers/cityReducer';
+import eventsReducer from './reducers/eventsReducer';
 
 const logger = store => {
 	return next => {
@@ -10,6 +11,11 @@ const logger = store => {
 		};
 	};
 };
+
+const rootReducer = combineReducers({
+    city: cityReducer,
+    events: eventsReducer,
+})
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

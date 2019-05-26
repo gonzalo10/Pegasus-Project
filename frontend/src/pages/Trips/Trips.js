@@ -4,6 +4,7 @@ import AuthContext from '../../context/auth-context';
 import './Trips.css';
 import Grid from '@material-ui/core/Grid';
 import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
+import BookmarkBorder from '@material-ui/icons/BookmarkBorder';
 import Madrid from '../../assets/img/Madrid.png';
 import { Link, withRouter } from 'react-router-dom';
 
@@ -77,6 +78,10 @@ class TripPage extends React.PureComponent {
 			});
 	}
 
+	handleEvents = () => {
+		
+	}
+
 	render() {
 		const { destinations } = this.state;
 		let trips = <h1>Spinner</h1>;
@@ -140,7 +145,13 @@ class TripPage extends React.PureComponent {
 													justify="center"
 													alignItems="flex-start">
 													<Link to={`/events`}>
-													<button></button></Link>
+													<button onClick={this.handleEvents}>
+														<BookmarkBorder
+															className="icon"
+															fontSize="large" />
+																Save
+													</button>
+													</Link>
 												</Grid>
 											</Grid>
 
