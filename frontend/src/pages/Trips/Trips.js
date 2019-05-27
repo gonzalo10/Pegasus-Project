@@ -1,9 +1,4 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-
-import * as actionCreators from '../../actions/eventsActions';
-
 
 import AuthContext from '../../context/auth-context';
 import './Trips.css';
@@ -27,16 +22,14 @@ class TripPage extends React.PureComponent {
 	static contextType = AuthContext;
 
 	componentDidMount() {
-		console.log(this.props)
 		const query = this.props.match.params.id;
 		this.setState({ city: query }, () => this.fetchTrips());
-		console.log(this.props.city)
-		console.log(this.props.key)
 	}
 
 	componentDidUpdate() {
 		const { city } = this.state;
 		const query = this.props.match.params.id;
+		console.log('this props', this.props.keyEvent);
 		if (query !== city) {
 			this.setState({ city: query }, () => this.fetchTrips());
 		}
@@ -68,15 +61,12 @@ class TripPage extends React.PureComponent {
 			.then(res => {
 				console.log(res);
 				if (res.status !== 200 && res.status !== 201) {
-					console.log('Error', res);
 					throw new Error('Failed!');
 				}
 				return res.json();
 			})
 			.then(resData => {
 				const trips = resData.data.trips;
-
-				console.log(trips);
 				this.setState({ destinations: trips });
 			})
 			.catch(err => {
@@ -84,9 +74,7 @@ class TripPage extends React.PureComponent {
 			});
 	}
 
-	handleEvents = () => {
-
-	}
+	handleEvents = () => {};
 
 	render() {
 		const { destinations } = this.state;
@@ -150,11 +138,10 @@ class TripPage extends React.PureComponent {
 													direction="column"
 													justify="center"
 													alignItems="flex-start">
-													<button onClick={() => this.props.onStoreKey(key)}>
-														<BookmarkBorder
-															className="icon"
-															fontSize="large" />
-																Save
+													<button
+														onClick={() => this.props.onStoreKey(destination)}>
+														<BookmarkBorder className="icon" fontSize="large" />
+														Save
 													</button>
 												</Grid>
 											</Grid>
@@ -187,20 +174,4 @@ class TripPage extends React.PureComponent {
 	}
 }
 
-const mapStateToProps = state => {
-	return {
-		key: state.events.key,
-		city: state.city
-	};
-};
-
-const mapDispatchToProps = dispatch => {
-	return {
-		onStoreKey: (key) => dispatch(actionCreators.storeKey(key)),
-	};
-};
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(withRouter(TripPage));
+export default TripPage;

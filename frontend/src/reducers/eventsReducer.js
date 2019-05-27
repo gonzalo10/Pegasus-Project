@@ -1,5 +1,4 @@
 import { STORE_KEY } from '../actions/types';
-import { updateObject } from '../shared/utility';
 
 const initialState = {
 	key: [],

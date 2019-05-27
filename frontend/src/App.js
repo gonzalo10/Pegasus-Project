@@ -50,7 +50,10 @@ class App extends Component {
 									{!this.state.token && (
 										<Route path="/auth" component={AuthPage} />
 									)}
-									<Route path="/events" component={EventsPage} />
+									<Route
+										path="/events"
+										render={props => <EventsPage {...props} />}
+									/>
 									<Route
 										path="/trips/:id"
 										render={props => <TripsContainer {...props} />}
