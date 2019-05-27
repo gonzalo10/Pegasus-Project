@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-import './App.css';
-import Autocomplete from './Autocomplete';
-const App = () => {
-  return (
-    <div className="App">
-      <Autocomplete
-        options={[
-          'Valladolid',
-          'Mayorca',
-          'Barcelona',
-          'Tenerife',
-          'Madrid'
-        ]}
-      />
-    </div>
-  );
-};
-export default App;
+export class Autocomplete extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <div className="search">
+          <input type="text" className="search-box" />
+          <input type="submit" value="" className="search-btn" />
+        </div>
+      </React.Fragment>
+    );
+  }
+}
+export default Autocomplete;
