@@ -14,13 +14,10 @@ const introPage = (props) => {
             <img src={Monkey} alt='Working on it'/>
             <Autocomplete
                 options={[
-                'Papaya',
-                'Persimmon',
-                'Paw Paw',
-                'Prickly Pear',
-                'Peach',
-                'Pomegranate',
-                'Pineapple'
+                'Madrid',
+                'Tenerife',
+                'Mayorca',
+                'Burgos',
                 ]}
             />
         </div>
