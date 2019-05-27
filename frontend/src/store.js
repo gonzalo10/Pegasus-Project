@@ -25,5 +25,6 @@ const store = createStore(
 );
 
 console.log('STORE STATE', store.getState());
+console.log('STORE KEY', store.getState());
 
 export default store;

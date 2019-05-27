@@ -1,191 +1,113 @@
-import React from 'react';
+import React, { Component } from 'react';
+
 import PropTypes from 'prop-types';
-import deburr from 'lodash/deburr';
-import Autosuggest from 'react-autosuggest';
-import match from 'autosuggest-highlight/match';
-import parse from 'autosuggest-highlight/parse';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import MenuItem from '@material-ui/core/MenuItem';
-import { withStyles } from '@material-ui/core/styles';
 
+import './AutoComplete.css'
 
+export class Autocomplete extends Component {
 
-const suggestions = [
-  { label: 'Madrid' },
-  { label: 'Barcelona' },
-  { label: 'Milan' },
-  { label: 'Roma' },
-  { label: 'London' },
-  { label: 'Paris' },
-  { label: 'Berlin' },
-  { label: 'Oslo' },
-  { label: 'Seoul' },
-  { label: 'Pekin' },
-  { label: 'Tokyo' },
+  static propTypes = {
+    options: PropTypes.instanceOf(Array).isRequired
+  };
 
-];
-
-function renderInputComponent(inputProps) {
-  const { classes, inputRef = () => {}, ref, ...other } = inputProps;
-
-  return (
-    <TextField
-      fullWidth
-      InputProps={{
-        inputRef: node => {
-          ref(node);
-          inputRef(node);
-        },
-        classes: {
-          input: classes.input,
-        },
-      }}
-      {...other}
-    />
-  );
-}
-
-function renderSuggestion(suggestion, { query, isHighlighted }) {
-  const matches = match(suggestion.label, query);
-  const parts = parse(suggestion.label, matches);
-
-  return (
-    <MenuItem selected={isHighlighted} component="div">
-      <div>
-        {parts.map((part, index) =>
-          part.highlight ? (
-            <span key={String(index)} style={{ fontWeight: 500 }}>
-              {part.text}
-            </span>
-          ) : (
-            <strong key={String(index)} style={{ fontWeight: 300 }}>
-              {part.text}
-            </strong>
-          ),
-        )}
-      </div>
-    </MenuItem>
-  );
-}
-
-function getSuggestions(value) {
-  const inputValue = deburr(value.trim()).toLowerCase();
-  const inputLength = inputValue.length;
-  let count = 0;
-
-  return inputLength === 0
-    ? []
-    : suggestions.filter(suggestion => {
-        const keep =
-          count < 5 && suggestion.label.slice(0, inputLength).toLowerCase() === inputValue;
-
-        if (keep) {
-          count += 1;
-        }
-
-        return keep;
-      });
-}
-
-function getSuggestionValue(suggestion) {
-  return suggestion.label;
-}
-
-const styles = theme => ({
-  root: {
-    height: '100%',
-    flexGrow: 1,
-  },
-  container: {
-    position: 'relative',
-    paddingTop: '10px',
-  },
-  suggestionsContainerOpen: {
-    position: 'absolute',
-    zIndex: 1,
-    marginTop: theme.spacing.unit,
-    left: 0,
-    right: 0,
-  },
-  suggestion: {
-    display: 'block',
-  },
-  suggestionsList: {
-    margin: 0,
-    padding: 0,
-    listStyleType: 'none',
-  },
-  divider: {
-    height: theme.spacing.unit * 2,
-  },
-});
-
-class IntegrationAutosuggest extends React.Component {
   state = {
-    single: '',
-    suggestions: [],
+    activeOption: 0,
+    filteredOptions: [],
+    showOptions: false,
+    userInput: ''
   };
 
-  handleSuggestionsFetchRequested = ({ value }) => {
+  onChange = (e) => {
+    const { options } = this.props;
+    const userInput = e.currentTarget.value;
+    const filteredOptions = options.filter(
+          (option) => option.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+        );
     this.setState({
-      suggestions: getSuggestions(value),
+          activeOption: 0,
+          filteredOptions,
+          showOptions: true,
+          userInput
+        });
+  };
+
+  onClick = (e) => {
+    this.setState({
+      activeOption: 0,
+      filteredOption: [],
+      showOptions: false,
+      userInput: e.currentTarget.innerText
     });
   };
 
-  handleSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: [],
-    });
+  onKeyDown = (e) => {
+    const { activeOption, filteredOptions } = this.state;
+    if (e.keyCode === 13) {
+          this.setState({
+            activeOption: 0,
+            showSuggestions: false,
+            userInput: filteredOptions[activeOption]
+          });
+        } else if (e.keyCode === 38) {
+          if (activeOption === 0) {
+            return;
+          }
+    this.setState({ activeOption: activeOption - 1 });
+        } else if (e.keyCode === 40) {
+          if (activeOption - 1 === filteredOptions.length) {
+            return;
+          }
+    this.setState({ activeOption: activeOption + 1 });
+        }
   };
-
-  handleChange = name => (event, { newValue }) => {
-    this.setState({
-      [name]: newValue,
-    });
-  };
-
+  
   render() {
-    const { classes } = this.props;
-
-    const autosuggestProps = {
-      renderInputComponent,
-      suggestions: this.state.suggestions,
-      onSuggestionsFetchRequested: this.handleSuggestionsFetchRequested,
-      onSuggestionsClearRequested: this.handleSuggestionsClearRequested,
-      getSuggestionValue,
-      renderSuggestion,
-    };
-
+    const {
+      onClick,
+      onChange,
+      onKeyDown,
+      state: { activeOption, filteredOptions, showOptions, userInput }
+    } = this;
+    let optionList;
+    if (showOptions && userInput) {
+      if (filteredOptions.length) {
+        optionList = (
+          <ul className="options">
+            {filteredOptions.map((optionName, index) => {
+              let className;
+              if (index === activeOption) {
+                className = 'option-active';
+              }
+              return (
+                <li className={className} key={optionName} onClick={onClick}>
+                  {optionName}
+                </li>
+              );
+            })}
+          </ul>
+        );
+      } else {
+        optionList = (
+          <div className="no-options">
+            <em>No Option!</em>
+          </div>
+        );
+      }
+    }
     return (
-      <div className={classes.root}>
-        <Autosuggest
-          {...autosuggestProps}
-          inputProps={{
-            classes,
-            placeholder: 'Select Your Hometown',
-            value: this.state.single,
-            onChange: this.handleChange('single'),
-          }}
-          theme={{
-            container: classes.container,
-            suggestionsContainerOpen: classes.suggestionsContainerOpen,
-            suggestionsList: classes.suggestionsList,
-            suggestion: classes.suggestion,
-          }}
-          renderSuggestionsContainer={options => (
-            <Paper {...options.containerProps} square>
-              {options.children}
-            </Paper>
-          )}
-        />
-      </div>
+      <React.Fragment>
+        <div className="search">
+          <input
+            type="text"
+            className="search-box"
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+            value={userInput} />
+          <input type="submit" value="" className="search-btn" />
+          {optionList}
+        </div>
+      </React.Fragment>
     );
   }
 }
-
-IntegrationAutosuggest.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(IntegrationAutosuggest);
+export default Autocomplete;

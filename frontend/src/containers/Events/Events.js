@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 
 import Modal from '../../components/UI/Modal/modal';
 import Backdrop from '../../components/UI/Backdrop/Backdrop';
 import EventList from '../../components/Events/EventList/EventList';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import AuthContext from '../../context/auth-context';
-import { Link } from 'react-router-dom';
 
 import './Events.css';
 
@@ -29,8 +31,10 @@ class EventsPage extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props.city);
+		console.log(this.props.key);
 		this.fetchEvents();
+		console.log(this.props.key)
+		console.log(this.props.city)
 	}
 
 	startCreateEventHandler = () => {
@@ -220,6 +224,7 @@ class EventsPage extends Component {
 	render() {
 		return (
 			<React.Fragment>
+				<h1>{console.log(this.props.key)}</h1>
 				<div className="recommend_row">
 					<div className="recommend_title">
 						<h3>You are one Click away from an awesome trip</h3>
@@ -301,5 +306,13 @@ class EventsPage extends Component {
 		);
 	}
 }
+const mapStateToProps = state => {
+	return {
+		key: state.key,
+		city: state.city
+	};
+};
 
-export default EventsPage;
+export default connect(
+	mapStateToProps
+)(EventsPage);
