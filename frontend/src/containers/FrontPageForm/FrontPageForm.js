@@ -5,17 +5,18 @@ import { Link } from 'react-router-dom';
 
 import * as actionCreators from '../../actions/cityActions';
 
-
 import Button from '../../components/UI/Button/Button';
 import Grid from '@material-ui/core/Grid';
 import FlightTakeoff from '@material-ui/icons/FlightTakeoff';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
+import Autocomplete from '../../components/UI/AutoComplete/AutoComplete'
 
 
 import './FrontPageForm.css';
+
+
 
 class FrontPageForm extends Component {
 	state = {
@@ -23,9 +24,9 @@ class FrontPageForm extends Component {
 		continue: false,
 	};
 
-	handleChange = e => {
-		e.preventDefault();
-		this.setState({ destinationCity: e.target.value, continue: true });
+	handleChange = () => {
+
+		this.setState({continue: true });
 	};
 
 	render() {
@@ -34,8 +35,9 @@ class FrontPageForm extends Component {
 			<Paper className="root" elevation={1}>
 				<Typography variant="h5" component="h3" className="typo">
 					<em>Where Is Going To Be Your Next Adventure?</em>
-					<div className="roots">
-						<form>
+					<div className="roots" >
+					<Link to={`/trips/${destinationCity}`}>
+						<form style={{padding: '10px', position: 'relative'}}>
 							<Grid container spacing={24}>
 								<Grid item xs={2} padding={0}>
 									<FlightTakeoff
@@ -45,27 +47,31 @@ class FrontPageForm extends Component {
 									/>
 								</Grid>
 								<Grid item xs={7}>
-									<input
+									<Autocomplete
+										options={[
+										'Madrid',
+										'Tenerife',
+										'Mayorca',
+										'Burgos',
+										]}
 										style={{ width: '100%' }}
-										type="text"
-										placeholder="Your Homecity"
 										name="city"
-										onChange={e => this.handleChange(e)}
-										value={destinationCity}
+										userInput={destinationCity}
 									/>
 								</Grid>
 								<Grid item xs={3}>
-									<Link to={`/trips/${destinationCity}`}>
+									
 										<Button
 											clicked={() => this.props.onStoreCity(destinationCity)}
 											disabled={!this.state.continue}>
 											<NavigationIcon fontSize="small" />
 											Go!
 										</Button>
-									</Link>
+									
 								</Grid>
 							</Grid>
 						</form>
+						</Link>
 					</div>
 				</Typography>
 			</Paper>
